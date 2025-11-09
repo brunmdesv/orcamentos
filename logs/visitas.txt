@@ -1,3 +1,10 @@
 === LOG DE VISITAS - SCROLL ATÉ O FIM ===
 
 Este arquivo será atualizado automaticamente quando usuários chegarem ao fim da página.
+Data/Hora: 09/11/2025 10:03:23
+URL: https://orcamentos-liard.vercel.app/
+User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36
+Scroll: 2976px
+Screen: 1920x1080
+---
+
