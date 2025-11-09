@@ -3,12 +3,6 @@
     "api/save-visit.js": {
       "maxDuration": 10
     }
-  },
-  "rewrites": [
-    {
-      "source": "/api/save-visit",
-      "destination": "/api/save-visit.js"
-    }
-  ]
+  }
 }
 
