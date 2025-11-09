@@ -1,0 +1,42 @@
+name: Save Visit Log
+
+on:
+  repository_dispatch:
+    types: [save-visit]
+  workflow_dispatch:
+
+jobs:
+  save-log:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Save visit log
+        run: |
+          # Criar diretório se não existir
+          mkdir -p logs
+          
+          # Criar arquivo de log se não existir
+          if [ ! -f logs/visitas.txt ]; then
+            echo "=== LOG DE VISITAS - SCROLL ATÉ O FIM ===" > logs/visitas.txt
+            echo "" >> logs/visitas.txt
+          fi
+          
+          # Adicionar nova entrada (os dados virão do evento)
+          echo "Data/Hora: $(date '+%d/%m/%Y %H:%M:%S')" >> logs/visitas.txt
+          echo "Evento recebido: ${{ github.event.client_payload.datetime || 'N/A' }}" >> logs/visitas.txt
+          echo "URL: ${{ github.event.client_payload.url || 'N/A' }}" >> logs/visitas.txt
+          echo "User Agent: ${{ github.event.client_payload.userAgent || 'N/A' }}" >> logs/visitas.txt
+          echo "---" >> logs/visitas.txt
+          echo "" >> logs/visitas.txt
+          
+          # Commit e push
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add logs/visitas.txt
+          git commit -m "Update visit log: $(date '+%Y-%m-%d %H:%M:%S')" || exit 0
+          git push
+

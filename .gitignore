@@ -1,0 +1,16 @@
+# Arquivo de configuração com token (NUNCA commitar!)
+config.js
+
+# Logs locais (opcional - descomente se não quiser commitar)
+# logs/
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

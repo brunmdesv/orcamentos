@@ -1,0 +1,3 @@
+=== LOG DE VISITAS - SCROLL ATÉ O FIM ===
+
+Este arquivo será atualizado automaticamente quando usuários chegarem ao fim da página.

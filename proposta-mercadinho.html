@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacote Completo - Grupo de Ofertas do Mercadinho</title>
+    <meta name="description" content="Pacote completo de gestão de ofertas e redes sociais para mercadinhos">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #2563eb;
+            --color-primary-dark: #1e40af;
+            --color-secondary: #10b981;
+            --color-accent: #f59e0b;
+            --color-text: #1f2937;
+            --color-text-light: #6b7280;
+            --color-bg: #ffffff;
+            --color-bg-light: #f9fafb;
+            --color-bg-section: #f3f4f6;
+            --color-border: #e5e7eb;
+            --color-success: #10b981;
+            --color-warning: #f59e0b;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --border-radius: 12px;
+            --border-radius-sm: 8px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--color-text);
+            background: var(--color-bg-light);
+            font-size: 16px;
+        }
+
+        /* Mobile First - Base Styles */
+        .container {
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            background: var(--color-bg);
+        }
+
+        /* Optional Badge */
+        .optional-badge {
+            display: inline-block;
+            background: var(--color-warning);
+            color: white;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--border-radius-sm);
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: var(--spacing-sm);
+            vertical-align: middle;
+        }
+
+        /* Main Content */
+        main {
+            padding: var(--spacing-xl) var(--spacing-md) var(--spacing-lg);
+        }
+
+        .intro-section {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-lg);
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .intro-section h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .intro-section p {
+            color: var(--color-text-light);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .section-title-icon {
+            font-size: 2rem;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: var(--spacing-xs);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .card-icon {
+            font-size: 1.25rem;
+        }
+
+        .card-description {
+            color: var(--color-text-light);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            margin-top: var(--spacing-xs);
+        }
+
+        /* Feature List */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+        }
+
+        /* Benefits Grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        .benefit-card {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            text-align: center;
+            transition: box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .benefit-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-color: var(--color-primary);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .benefit-card h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .benefit-card p {
+            color: var(--color-text-light);
+            font-size: 0.9375rem;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            background: var(--color-bg-section);
+            border-left: 4px solid var(--color-primary);
+            border-radius: var(--border-radius-sm);
+            padding: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        .info-box.warning {
+            background: #fef3c7;
+            border-left-color: var(--color-warning);
+        }
+
+        .info-box.success {
+            background: #d1fae5;
+            border-left-color: var(--color-success);
+        }
+
+        .info-box strong {
+            color: var(--color-text);
+            display: block;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .info-box p {
+            color: var(--color-text-light);
+            font-size: 0.9375rem;
+        }
+
+        /* Investment Section */
+        .investment-section {
+            background: var(--color-primary);
+            color: white;
+            border-radius: var(--border-radius);
+            padding: var(--spacing-xl) var(--spacing-md);
+            text-align: center;
+            margin: var(--spacing-xl) 0;
+        }
+
+        .investment-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .investment-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: var(--spacing-md) 0;
+        }
+
+        .investment-details {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius-sm);
+            padding: var(--spacing-md);
+            margin-top: var(--spacing-md);
+            text-align: left;
+        }
+
+        .investment-details strong {
+            display: block;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .investment-details p {
+            margin-bottom: var(--spacing-sm);
+            font-size: 0.9375rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--color-bg-section);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-xl) var(--spacing-md);
+            text-align: center;
+            margin: var(--spacing-xl) 0;
+        }
+
+        .cta-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .cta-section p {
+            color: var(--color-text-light);
+            margin-bottom: var(--spacing-lg);
+            font-size: 1rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--color-primary);
+            color: white;
+            padding: var(--spacing-md) var(--spacing-xl);
+            border-radius: var(--border-radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+        }
+
+        .cta-button:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-text);
+            color: white;
+            text-align: center;
+            padding: var(--spacing-lg) var(--spacing-md);
+            margin-top: var(--spacing-xl);
+        }
+
+        footer p {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        /* Tablet Styles */
+        @media (min-width: 768px) {
+            main {
+                padding: var(--spacing-xl) var(--spacing-lg);
+            }
+
+            .intro-section h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .investment-amount {
+                font-size: 3rem;
+            }
+
+            .investment-details {
+                max-width: 500px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            main {
+                padding: var(--spacing-xl) var(--spacing-xl);
+            }
+
+            .intro-section h1 {
+                font-size: 2.25rem;
+            }
+
+            .section {
+                margin-bottom: var(--spacing-xl);
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .benefits-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .investment-section {
+                padding: var(--spacing-xl);
+            }
+
+            .cta-section {
+                padding: var(--spacing-xl);
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-0 {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main>
+            <div class="intro-section">
+                <h1>🛍️ Pacote Completo</h1>
+                <p>Grupo de Ofertas do Mercadinho</p>
+            </div>
+            <!-- Entregas Semanais -->
+            <section id="entregas" class="section">
+                <h2 class="section-title">
+                    <span class="section-title-icon">📆</span>
+                    Entregas Semanais
+                </h2>
+                <div class="feature-grid">
+                    <div class="card">
+                        <h3 class="card-title">
+                            <span class="card-icon">📄</span>
+                            3 encartes promocionais por semana
+                        </h3>
+                        <p class="card-description">
+                            12 encartes por mês com design profissional e personalizado com a identidade visual do seu mercadinho.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">
+                            <span class="card-icon">📱</span>
+                            Layouts para Instagram
+                        </h3>
+                        <p class="card-description">
+                            Formatos otimizados para Instagram, prontos para uso imediato nas redes sociais.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">
+                            <span class="card-icon">🎨</span>
+                            Design atrativo e personalizado
+                        </h3>
+                        <p class="card-description">
+                            Visual profissional que fortalece a marca do seu negócio e aumenta o engajamento dos clientes.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">
+                            <span class="card-icon">👤</span>
+                            Criação e gestão do grupo
+                        </h3>
+                        <p class="card-description">
+                            Criação do grupo de ofertas no WhatsApp e responsabilidade pelo envio semanal das ofertas para os clientes.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gestão de Redes Sociais -->
+            <section id="redes-sociais" class="section">
+                <h2 class="section-title">
+                    <span class="section-title-icon">💻</span>
+                    Gestão de Redes Sociais
+                </h2>
+                <div class="feature-grid">
+                    <div class="card">
+                        <h3 class="card-title">
+                            <span class="card-icon">📲</span>
+                            Postagem automática dos encartes
+                        </h3>
+                        <p class="card-description">
+                            Publicação no Instagram em horários estratégicos para maximizar o alcance e engajamento.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">
+                            <span class="card-icon">✍️</span>
+                            Legendas otimizadas
+                        </h3>
+                        <p class="card-description">
+                            Textos persuasivos com hashtags locais estrategicamente escolhidas para aumentar a visibilidade.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">
+                            <span class="card-icon">⏰</span>
+                            Agendamento inteligente
+                        </h3>
+                        <p class="card-description">
+                            Publicações nos melhores horários, baseados em análises de quando seu público está mais ativo.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">
+                            <span class="card-icon">💬</span>
+                            Interação e atendimento
+                        </h3>
+                        <p class="card-description">
+                            Respostas rápidas em comentários e mensagens diretas, mantendo o relacionamento com os clientes.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gestão de Tráfego Pago -->
+            <section id="trafego-pago" class="section">
+                <h2 class="section-title">
+                    <span class="section-title-icon">🚀</span>
+                    Gestão de Tráfego Pago
+                    <span class="optional-badge">Opcional</span>
+                </h2>
+                <div class="info-box warning" style="margin-bottom: var(--spacing-md);">
+                    <strong>ℹ️ Serviço Opcional</strong>
+                    <p>
+                        A gestão de tráfego pago é um serviço opcional, disponível apenas se o cliente realmente desejar contratar.
+                    </p>
+                </div>
+                <div class="feature-grid">
+                    <div class="card">
+                        <h3 class="card-title">
+                            <span class="card-icon">🎯</span>
+                            Criação e configuração de campanhas
+                        </h3>
+                        <p class="card-description">
+                            Anúncios profissionais no Facebook Ads, configurados para atingir seus objetivos de vendas.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">
+                            <span class="card-icon">📍</span>
+                            Segmentação de público local
+                        </h3>
+                        <p class="card-description">
+                            Direcionamento preciso para moradores próximos ao mercadinho, aumentando as chances de conversão.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">
+                            <span class="card-icon">📈</span>
+                            Otimização semanal
+                        </h3>
+                        <p class="card-description">
+                            Ajustes contínuos para melhorar alcance, cliques e conversões, sempre buscando os melhores resultados.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">
+                            <span class="card-icon">📊</span>
+                            Relatórios de resultados
+                        </h3>
+                        <p class="card-description">
+                            Acompanhamento detalhado de métricas: alcance, cliques, engajamento e retorno sobre investimento.
+                        </p>
+                    </div>
+                </div>
+                <div class="info-box warning">
+                    <strong>💡 Investimento em anúncios</strong>
+                    <p>
+                        O valor investido em anúncios é gerenciado separadamente pelo cliente. 
+                        Recomendamos um investimento mínimo de <strong>R$ 150/mês</strong> para melhores resultados.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Relatórios e Suporte -->
+            <section id="relatorios" class="section">
+                <h2 class="section-title">
+                    <span class="section-title-icon">📊</span>
+                    Relatórios e Suporte
+                </h2>
+                <div class="feature-grid">
+                    <div class="card">
+                        <h3 class="card-title">
+                            <span class="card-icon">📈</span>
+                            Relatório mensal completo
+                        </h3>
+                        <p class="card-description">
+                            Análise detalhada do desempenho: alcance, engajamento, resultados dos anúncios e insights acionáveis.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">
+                            <span class="card-icon">💬</span>
+                            Suporte direto via WhatsApp
+                        </h3>
+                        <p class="card-description">
+                            Comunicação rápida para ajustes, novas ofertas e resolução de dúvidas, sempre disponível.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">
+                            <span class="card-icon">📅</span>
+                            Organização do cronograma
+                        </h3>
+                        <p class="card-description">
+                            Planejamento semanal de ofertas em conjunto com você, garantindo que todas as promoções sejam divulgadas.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Benefícios -->
+            <section id="beneficios" class="section">
+                <h2 class="section-title">
+                    <span class="section-title-icon">🎯</span>
+                    Benefícios para o Mercadinho
+                </h2>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">👥</div>
+                        <h3>Mais Visibilidade</h3>
+                        <p>Alcance novos clientes toda semana através das redes sociais e anúncios direcionados</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">✨</div>
+                        <h3>Imagem Profissional</h3>
+                        <p>Presença digital consistente e profissional que fortalece a marca do seu negócio</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">⚡</div>
+                        <h3>Praticidade Total</h3>
+                        <p>Você apenas envia as ofertas e nós cuidamos de todo o resto: design, postagens e anúncios</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">📈</div>
+                        <h3>Aumento de Vendas</h3>
+                        <p>Estratégias focadas em converter visualizações em vendas reais e mensuráveis</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Investimento -->
+            <section id="investimento" class="investment-section">
+                <h2>💰 Investimento</h2>
+                <div class="investment-amount">R$ 700,00/mês</div>
+                <p style="font-size: 1.125rem; margin-bottom: var(--spacing-md);">
+                    Contrato mínimo de <strong>3 meses</strong>
+                </p>
+                <div class="investment-details">
+                    <p>
+                        <strong>💳 Forma de pagamento:</strong> Espécie e Pix
+                    </p>
+                    <p>
+                        <strong>📅 Vencimento:</strong> Até o dia 5 de cada mês
+                    </p>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <section class="cta-section">
+                <h2>Pronto para aumentar suas vendas?</h2>
+                <p>Vamos transformar a presença digital do seu mercadinho!</p>
+                <a href="https://wa.me/5586988695332" class="cta-button">
+                    📱 Falar no WhatsApp
+                </a>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2025 - Pacote Completo Grupo de Ofertas</p>
+            <p>Transformando sua presença digital em resultados reais</p>
+        </footer>
+    </div>
+
+    <!-- Arquivo de configuração (criar manualmente com seu token) -->
+    <script src="config.js"></script>
+    
+    <script>
+        // ============================================
+        // CONFIGURAÇÃO PARA SALVAR LOG NO GITHUB
+        // ============================================
+        // Para salvar no repositório GitHub, você precisa:
+        // 1. Criar um Personal Access Token no GitHub com permissão 'repo'
+        // 2. Criar um arquivo 'config.js' com: const GITHUB_TOKEN = 'seu_token_aqui';
+        // 3. Ou usar um serviço externo (veja instruções abaixo)
+        
+        // Configuração do repositório GitHub
+        const GITHUB_OWNER = 'brunmdesv '; // Seu username do GitHub
+        const GITHUB_REPO = 'https://github.com/brunmdesv/orcamentos.git'; // Nome do repositório
+        const GITHUB_TOKEN = typeof GITHUB_TOKEN !== 'undefined' ? GITHUB_TOKEN : ''; // Token (vem do config.js)
+        
+        // Nome do arquivo de log
+        const LOG_FILENAME = 'visitas-log.txt';
+        const LOG_PATH = 'logs/visitas.txt'; // Caminho no repositório
+
+        // Função para obter data/hora formatada
+        function getFormattedDateTime() {
+            const now = new Date();
+            const date = now.toLocaleDateString('pt-BR');
+            const time = now.toLocaleTimeString('pt-BR');
+            return `${date} ${time}`;
+        }
+
+        // Função para salvar no localStorage
+        function saveToLocalStorage(data) {
+            try {
+                const logs = JSON.parse(localStorage.getItem('scrollLogs') || '[]');
+                logs.push(data);
+                // Manter apenas os últimos 100 registros
+                if (logs.length > 100) {
+                    logs.shift();
+                }
+                localStorage.setItem('scrollLogs', JSON.stringify(logs));
+                console.log('✅ Log salvo no localStorage:', data);
+            } catch (error) {
+                console.error('❌ Erro ao salvar no localStorage:', error);
+            }
+        }
+
+        // Função para salvar no GitHub usando API
+        async function saveToGitHub(data) {
+            // Verifica se está configurado
+            if (!GITHUB_TOKEN || GITHUB_OWNER === 'SEU_USUARIO' || GITHUB_REPO === 'SEU_REPOSITORIO') {
+                console.log('⚠️ GitHub não configurado. Configure GITHUB_TOKEN, GITHUB_OWNER e GITHUB_REPO');
+                return;
+            }
+
+            try {
+                // Primeiro, busca o conteúdo atual do arquivo
+                const getFileUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${LOG_PATH}`;
+                
+                let currentContent = '';
+                let sha = null;
+
+                try {
+                    const getResponse = await fetch(getFileUrl, {
+                        headers: {
+                            'Authorization': `Bearer ${GITHUB_TOKEN}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
+                    });
+
+                    if (getResponse.ok) {
+                        const fileData = await getResponse.json();
+                        // Decodifica o conteúdo base64 (removendo quebras de linha do base64)
+                        currentContent = decodeURIComponent(escape(atob(fileData.content.replace(/\s/g, ''))));
+                        sha = fileData.sha;
+                    }
+                } catch (error) {
+                    console.log('📄 Arquivo não existe ainda, será criado');
+                }
+
+                // Adiciona nova entrada
+                let updatedContent;
+                if (!currentContent || currentContent.trim() === '') {
+                    // Cria cabeçalho se arquivo estiver vazio
+                    updatedContent = '=== LOG DE VISITAS - SCROLL ATÉ O FIM ===\n\n';
+                } else {
+                    updatedContent = currentContent;
+                }
+                
+                const newEntry = `Data/Hora: ${data.datetime}\nURL: ${data.url}\nUser Agent: ${data.userAgent}\nScroll: ${data.scrollPosition}px\nScreen: ${data.screenWidth}x${data.screenHeight}\n---\n\n`;
+                updatedContent += newEntry;
+                
+                // Codifica para base64
+                const encodedContent = btoa(unescape(encodeURIComponent(updatedContent)));
+
+                // Atualiza o arquivo no GitHub
+                const updateResponse = await fetch(getFileUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${GITHUB_TOKEN}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: `Update visit log: ${data.datetime}`,
+                        content: encodedContent,
+                        sha: sha
+                    })
+                });
+
+                if (updateResponse.ok) {
+                    console.log('✅ Log salvo no GitHub:', data);
+                } else {
+                    const errorData = await updateResponse.json();
+                    console.error('❌ Erro ao salvar no GitHub:', errorData);
+                }
+            } catch (error) {
+                console.error('❌ Erro ao salvar no GitHub:', error);
+            }
+        }
+
+        // Função alternativa: Enviar para webhook (mais seguro)
+        async function sendToWebhook(data) {
+            // Configure uma URL de webhook aqui (pode ser Formspree, n8n, etc)
+            const WEBHOOK_URL = ''; // Exemplo: 'https://formspree.io/f/xxxxx'
+            
+            if (!WEBHOOK_URL) {
+                return;
+            }
+
+            try {
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    console.log('✅ Dados enviados para webhook:', data);
+                } else {
+                    console.error('❌ Erro ao enviar para webhook:', response.status);
+                }
+            } catch (error) {
+                console.error('❌ Erro na requisição webhook:', error);
+            }
+        }
+
+        // Função para gerar arquivo de log completo
+        function generateLogFile() {
+            try {
+                const logs = JSON.parse(localStorage.getItem('scrollLogs') || '[]');
+                let logContent = '=== LOG DE VISITAS - SCROLL ATÉ O FIM ===\n\n';
+                
+                logs.forEach((log, index) => {
+                    logContent += `${index + 1}. Data/Hora: ${log.datetime}\n`;
+                    logContent += `   User Agent: ${log.userAgent}\n`;
+                    logContent += `   URL: ${log.url}\n`;
+                    logContent += `   Scroll Position: ${log.scrollPosition}px\n`;
+                    logContent += `   Window Height: ${log.windowHeight}px\n`;
+                    logContent += `   Document Height: ${log.documentHeight}px\n`;
+                    logContent += `   ---\n\n`;
+                });
+
+                return logContent;
+            } catch (error) {
+                console.error('❌ Erro ao gerar arquivo de log:', error);
+                return '';
+            }
+        }
+
+        // Função para fazer download do log
+        function downloadLogFile() {
+            const logContent = generateLogFile();
+            if (!logContent) {
+                console.error('❌ Nenhum log disponível para download');
+                return;
+            }
+
+            const blob = new Blob([logContent], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = LOG_FILENAME;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            console.log('✅ Arquivo de log baixado');
+        }
+
+        // Função principal para detectar scroll até o fim
+        function handleScrollToBottom() {
+            let hasScrolledToBottom = false;
+            let lastScrollTime = 0;
+            const debounceTime = 1000; // 1 segundo de debounce
+
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const windowHeight = window.innerHeight;
+                const documentHeight = document.documentElement.scrollHeight;
+                const scrollPosition = scrollTop + windowHeight;
+
+                // Verifica se chegou ao fim (com margem de 50px)
+                if (scrollPosition >= documentHeight - 50 && !hasScrolledToBottom) {
+                    const currentTime = Date.now();
+                    
+                    // Debounce: só registra se passou 1 segundo desde o último registro
+                    if (currentTime - lastScrollTime > debounceTime) {
+                        hasScrolledToBottom = true;
+                        lastScrollTime = currentTime;
+
+                        const logData = {
+                            datetime: getFormattedDateTime(),
+                            timestamp: new Date().toISOString(),
+                            url: window.location.href,
+                            userAgent: navigator.userAgent,
+                            scrollPosition: scrollTop,
+                            windowHeight: windowHeight,
+                            documentHeight: documentHeight,
+                            screenWidth: window.screen.width,
+                            screenHeight: window.screen.height
+                        };
+
+                        // Salva no localStorage
+                        saveToLocalStorage(logData);
+
+                        // Tenta salvar no GitHub (se configurado)
+                        saveToGitHub(logData);
+
+                        // Tenta enviar para webhook (se configurado)
+                        sendToWebhook(logData);
+
+                        console.log('📊 Usuário chegou ao fim da página:', logData);
+                    }
+                }
+
+                // Reset se o usuário voltar para cima
+                if (scrollPosition < documentHeight - 100) {
+                    hasScrolledToBottom = false;
+                }
+            });
+        }
+
+        // Inicializa quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            handleScrollToBottom();
+            console.log('🔍 Script de detecção de scroll iniciado');
+
+            // Adiciona comando no console para baixar o log
+            // Use: downloadLogFile() no console do navegador
+            window.downloadLogFile = downloadLogFile;
+            console.log('💡 Use downloadLogFile() no console para baixar o log completo');
+        });
+
+        // Detecta também quando a página está sendo fechada
+        window.addEventListener('beforeunload', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollPosition = scrollTop + windowHeight;
+
+            // Se estava perto do fim quando fechou, registra também
+            if (scrollPosition >= documentHeight - 100) {
+                const logData = {
+                    datetime: getFormattedDateTime(),
+                    timestamp: new Date().toISOString(),
+                    url: window.location.href,
+                    userAgent: navigator.userAgent,
+                    scrollPosition: scrollTop,
+                    windowHeight: windowHeight,
+                    documentHeight: documentHeight,
+                    event: 'page_unload'
+                };
+
+                // Tenta enviar para webhook usando sendBeacon (mais confiável ao fechar página)
+                const WEBHOOK_URL = ''; // Configure aqui se usar webhook
+                if (WEBHOOK_URL) {
+                    navigator.sendBeacon(WEBHOOK_URL, JSON.stringify(logData));
+                }
+            }
+        });
+    </script>
+</body>
+</html>
