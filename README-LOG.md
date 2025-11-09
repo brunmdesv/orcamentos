@@ -25,7 +25,7 @@ const GITHUB_TOKEN = 'seu_token_aqui';
 <script src="config.js"></script>
 ```
 
-3. Edite o arquivo `proposta-mercadinho.html` e configure:
+3. Edite o arquivo `index.html` e configure:
 ```javascript
 const GITHUB_OWNER = 'seu-usuario-github';
 const GITHUB_REPO = 'nome-do-repositorio';
@@ -68,7 +68,7 @@ Para baixar o log:
 
 ```
 projeto/
-├── proposta-mercadinho.html
+├── index.html
 ├── config.js (criar manualmente)
 ├── .gitignore (adicionar config.js)
 ├── logs/
@@ -125,14 +125,14 @@ Cada registro inclui:
 === LOG DE VISITAS - SCROLL ATÉ O FIM ===
 
 Data/Hora: 15/01/2025 14:30:25
-URL: https://seu-usuario.github.io/proposta-mercadinho.html
+URL: https://seu-usuario.github.io/index.html
 User Agent: Mozilla/5.0...
 Scroll: 1250px
 Screen: 1920x1080
 ---
 
 Data/Hora: 15/01/2025 15:45:10
-URL: https://seu-usuario.github.io/proposta-mercadinho.html
+URL: https://seu-usuario.github.io/index.html
 User Agent: Mozilla/5.0...
 Scroll: 1300px
 Screen: 1366x768
