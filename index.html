@@ -659,9 +659,6 @@
         </footer>
     </div>
 
-    <!-- Arquivo de configuração (criar manualmente com seu token) -->
-    <script src="config.js"></script>
-    
     <script>
         // ============================================
         // CONFIGURAÇÃO PARA SALVAR LOG NO GITHUB
@@ -671,14 +668,13 @@
         // 2. Criar um arquivo 'config.js' com: const GITHUB_TOKEN = 'seu_token_aqui';
         // 3. Ou usar um serviço externo (veja instruções abaixo)
         
-        // Configuração do repositório GitHub
-        const GITHUB_OWNER = 'brunmdesv '; // Seu username do GitHub
-        const GITHUB_REPO = 'https://github.com/brunmdesv/orcamentos.git'; // Nome do repositório
-        const GITHUB_TOKEN = typeof GITHUB_TOKEN !== 'undefined' ? GITHUB_TOKEN : ''; // Token (vem do config.js)
+        // Configuração - URL da API Vercel (será preenchida automaticamente)
+        // Se estiver no Vercel, usa a URL da função serverless
+        // Se estiver local, use: const API_URL = 'http://localhost:3000/api/save-visit';
+        const API_URL = window.location.origin + '/api/save-visit';
         
-        // Nome do arquivo de log
+        // Nome do arquivo de log (para download local)
         const LOG_FILENAME = 'visitas-log.txt';
-        const LOG_PATH = 'logs/visitas.txt'; // Caminho no repositório
 
         // Função para obter data/hora formatada
         function getFormattedDateTime() {
@@ -704,91 +700,10 @@
             }
         }
 
-        // Função para salvar no GitHub usando API
+        // Função para salvar no GitHub via Vercel API
         async function saveToGitHub(data) {
-            // Verifica se está configurado
-            if (!GITHUB_TOKEN || GITHUB_OWNER === 'SEU_USUARIO' || GITHUB_REPO === 'SEU_REPOSITORIO') {
-                console.log('⚠️ GitHub não configurado. Configure GITHUB_TOKEN, GITHUB_OWNER e GITHUB_REPO');
-                return;
-            }
-
             try {
-                // Primeiro, busca o conteúdo atual do arquivo
-                const getFileUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${LOG_PATH}`;
-                
-                let currentContent = '';
-                let sha = null;
-
-                try {
-                    const getResponse = await fetch(getFileUrl, {
-                        headers: {
-                            'Authorization': `Bearer ${GITHUB_TOKEN}`,
-                            'Accept': 'application/vnd.github.v3+json'
-                        }
-                    });
-
-                    if (getResponse.ok) {
-                        const fileData = await getResponse.json();
-                        // Decodifica o conteúdo base64 (removendo quebras de linha do base64)
-                        currentContent = decodeURIComponent(escape(atob(fileData.content.replace(/\s/g, ''))));
-                        sha = fileData.sha;
-                    }
-                } catch (error) {
-                    console.log('📄 Arquivo não existe ainda, será criado');
-                }
-
-                // Adiciona nova entrada
-                let updatedContent;
-                if (!currentContent || currentContent.trim() === '') {
-                    // Cria cabeçalho se arquivo estiver vazio
-                    updatedContent = '=== LOG DE VISITAS - SCROLL ATÉ O FIM ===\n\n';
-                } else {
-                    updatedContent = currentContent;
-                }
-                
-                const newEntry = `Data/Hora: ${data.datetime}\nURL: ${data.url}\nUser Agent: ${data.userAgent}\nScroll: ${data.scrollPosition}px\nScreen: ${data.screenWidth}x${data.screenHeight}\n---\n\n`;
-                updatedContent += newEntry;
-                
-                // Codifica para base64
-                const encodedContent = btoa(unescape(encodeURIComponent(updatedContent)));
-
-                // Atualiza o arquivo no GitHub
-                const updateResponse = await fetch(getFileUrl, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `Bearer ${GITHUB_TOKEN}`,
-                        'Accept': 'application/vnd.github.v3+json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        message: `Update visit log: ${data.datetime}`,
-                        content: encodedContent,
-                        sha: sha
-                    })
-                });
-
-                if (updateResponse.ok) {
-                    console.log('✅ Log salvo no GitHub:', data);
-                } else {
-                    const errorData = await updateResponse.json();
-                    console.error('❌ Erro ao salvar no GitHub:', errorData);
-                }
-            } catch (error) {
-                console.error('❌ Erro ao salvar no GitHub:', error);
-            }
-        }
-
-        // Função alternativa: Enviar para webhook (mais seguro)
-        async function sendToWebhook(data) {
-            // Configure uma URL de webhook aqui (pode ser Formspree, n8n, etc)
-            const WEBHOOK_URL = ''; // Exemplo: 'https://formspree.io/f/xxxxx'
-            
-            if (!WEBHOOK_URL) {
-                return;
-            }
-
-            try {
-                const response = await fetch(WEBHOOK_URL, {
+                const response = await fetch(API_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -797,14 +712,21 @@
                 });
 
                 if (response.ok) {
-                    console.log('✅ Dados enviados para webhook:', data);
+                    const result = await response.json();
+                    console.log('✅ Log salvo no GitHub via Vercel:', result);
+                    return true;
                 } else {
-                    console.error('❌ Erro ao enviar para webhook:', response.status);
+                    const errorData = await response.json();
+                    console.error('❌ Erro ao salvar no GitHub:', errorData);
+                    return false;
                 }
             } catch (error) {
-                console.error('❌ Erro na requisição webhook:', error);
+                console.error('❌ Erro na requisição para Vercel:', error);
+                console.log('ℹ️ Isso é normal se você estiver testando localmente sem o Vercel');
+                return false;
             }
         }
+
 
         // Função para gerar arquivo de log completo
         function generateLogFile() {
@@ -885,11 +807,8 @@
                         // Salva no localStorage
                         saveToLocalStorage(logData);
 
-                        // Tenta salvar no GitHub (se configurado)
+                        // Salva no GitHub via Vercel API
                         saveToGitHub(logData);
-
-                        // Tenta enviar para webhook (se configurado)
-                        sendToWebhook(logData);
 
                         console.log('📊 Usuário chegou ao fim da página:', logData);
                     }
@@ -906,12 +825,20 @@
         document.addEventListener('DOMContentLoaded', function() {
             handleScrollToBottom();
             console.log('🔍 Script de detecção de scroll iniciado');
+            console.log('📡 API URL:', API_URL);
 
             // Adiciona comando no console para baixar o log
             // Use: downloadLogFile() no console do navegador
             window.downloadLogFile = downloadLogFile;
             console.log('💡 Use downloadLogFile() no console para baixar o log completo');
         });
+
+        // Inicializa também se a página já estiver carregada
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', handleScrollToBottom);
+        } else {
+            handleScrollToBottom();
+        }
 
         // Detecta também quando a página está sendo fechada
         window.addEventListener('beforeunload', function() {
@@ -933,10 +860,10 @@
                     event: 'page_unload'
                 };
 
-                // Tenta enviar para webhook usando sendBeacon (mais confiável ao fechar página)
-                const WEBHOOK_URL = ''; // Configure aqui se usar webhook
-                if (WEBHOOK_URL) {
-                    navigator.sendBeacon(WEBHOOK_URL, JSON.stringify(logData));
+                // Tenta salvar usando sendBeacon (mais confiável ao fechar página)
+                if (navigator.sendBeacon) {
+                    const blob = new Blob([JSON.stringify(logData)], { type: 'application/json' });
+                    navigator.sendBeacon(API_URL, blob);
                 }
             }
         });
