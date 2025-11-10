@@ -36,3 +36,10 @@ Scroll: 5193px
 Screen: 1920x1080
 ---
 
+Data/Hora: 10/11/2025 08:15:44
+URL: https://orcamentos-liard.vercel.app/
+User Agent: Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Mobile Safari/537.36
+Scroll: 4957.91650390625px
+Screen: 450x1000
+---
+
